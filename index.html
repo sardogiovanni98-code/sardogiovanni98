@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sardo Giovanni - Portfolio</title>
+    <style>
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Tahoma, sans-serif;
+            background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+            color: #f3f4f6;
+            line-height: 1.6;
+        }
+        a { color: inherit; }
+        .container {
+            width: min(1100px, calc(100% - 32px));
+            margin: 0 auto;
+        }
+        header {
+            background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(8px);
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            border-bottom: 1px solid rgba(255,255,255,0.12);
+        }
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0;
+        }
+        .brand {
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+        .menu {
+            display: flex;
+            gap: 24px;
+            font-size: 0.96rem;
+        }
+        .menu a {
+            text-decoration: none;
+            color: #d1d5db;
+        }
+        .menu a:hover { color: white; }
+        .hero {
+            padding: 110px 0 70px;
+        }
+        .hero-wrap {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 48px;
+            align-items: center;
+        }
+        .eyebrow {
+            display: inline-block;
+            padding: 8px 14px;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 999px;
+            color: #c7d2fe;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 18px;
+        }
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 5rem);
+            line-height: 1.05;
+            margin: 0 0 18px;
+        }
+        .accent { color: #a78bfa; }
+        .lead {
+            font-size: 1.08rem;
+            color: #d1d5db;
+            max-width: 640px;
+            margin-bottom: 28px;
+        }
+        .cta-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-top: 10px;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 22px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: transform .2s ease, opacity .2s ease;
+        }
+        .btn:hover { transform: translateY(-1px); }
+        .btn-primary {
+            background: linear-gradient(135deg, #8b5cf6, #6366f1);
+            color: white;
+            box-shadow: 0 10px 22px rgba(99, 102, 241, 0.36);
+        }
+        .btn-secondary {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.18);
+            color: #f3f4f6;
+        }
+        .portrait {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .photo-card {
+            width: min(420px, 100%);
+            aspect-ratio: 1 / 1.15;
+            border-radius: 30px;
+            background: linear-gradient(160deg, rgba(139,92,246,0.35), rgba(59,130,246,0.18));
+            border: 1px solid rgba(255,255,255,0.15);
+            box-shadow: 0 30px 60px rgba(17,24,39,0.35);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(6rem, 12vw, 10rem);
+        }
+        section {
+            padding: 36px 0 22px;
+        }
+        .section-title {
+            font-size: clamp(1.9rem, 3vw, 2.8rem);
+            margin: 0 0 18px;
+        }
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0,1fr));
+            gap: 22px;
+        }
+        .card {
+            background: rgba(17, 24, 39, 0.72);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px;
+            padding: 22px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+        }
+        .card h3 {
+            margin: 0 0 12px;
+            font-size: 1.25rem;
+        }
+        .card p, .card li {
+            color: #d1d5db;
+        }
+        .stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 12px;
+        }
+        .chip {
+            display: inline-block;
+            background: rgba(167, 139, 250, 0.12);
+            color: #ddd6fe;
+            border: 1px solid rgba(167, 139, 250, 0.35);
+            border-radius: 999px;
+            padding: 8px 12px;
+            font-size: 0.82rem;
+            font-weight: 600;
+        }
+        .project-list {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0,1fr));
+            gap: 22px;
+            margin-top: 12px;
+        }
+        .project-card {
+            background: rgba(17, 24, 39, 0.72);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px;
+            padding: 22px;
+        }
+        .project-card h3 {
+            font-size: 1.25rem;
+            margin-top: 0;
+        }
+        .project-card p {
+            color: #d1d5db;
+        }
+        .project-meta {
+            margin-top: 18px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .label {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 999px;
+            padding: 7px 10px;
+            color: #e5e7eb;
+            font-size: 0.78rem;
+        }
+        .contact-box {
+            background: linear-gradient(135deg, rgba(139,92,246,0.12), rgba(59,130,246,0.12));
+            border: 1px solid rgba(167, 139, 250, 0.28);
+            padding: 26px;
+            border-radius: 22px;
+        }
+        form {
+            display: grid;
+            gap: 14px;
+            margin-top: 18px;
+        }
+        input, textarea {
+            width: 100%;
+            border: 1px solid rgba(255,255,255,0.14);
+            background: rgba(15, 23, 42, 0.8);
+            color: white;
+            border-radius: 12px;
+            padding: 16px 18px;
+            font: inherit;
+        }
+        textarea { min-height: 150px; resize: vertical; }
+        .submit-btn {
+            width: fit-content;
+            border: none;
+            cursor: pointer;
+        }
+        footer {
+            padding: 34px 0 60px;
+            text-align: center;
+            color: #cbd5e1;
+        }
+        .socials {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            margin-bottom: 18px;
+        }
+        .socials a {
+            width: 42px;
+            height: 42px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+        @media (max-width: 860px) {
+            .hero-wrap, .card-grid, .project-list { grid-template-columns: 1fr; }
+            .nav { flex-direction: column; gap: 14px; }
+            .menu { flex-wrap: wrap; justify-content: center; }
+            .hero { padding-top: 70px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container nav">
+            <div class="brand">SARDOGIOVANNI</div>
+            <nav class="menu" aria-label="Navigazione principale">
+                <a href="#chi-sono">Chi sono</a>
+                <a href="#servizi">Servizi</a>
+                <a href="#progetti">Progetti</a>
+                <a href="#contatti">Contatti</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container hero-wrap">
+                <div>
+                    <div class="eyebrow">Portfolio Personale</div>
+                    <h1>Creo <span class="accent">esperienze digitali</span> efficaci e moderne.</h1>
+                    <p class="lead">Sono Giovanni, uno sviluppatore web appassionato di design, tecnologia e soluzioni concrete. Mi occupo di creare siti, piattaforme e strumenti digitali pensati per rendere semplice e potente l'esperienza utente.</p>
+                    <div class="cta-row">
+                        <a class="btn btn-primary" href="#progetti">Guarda i progetti</a>
+                        <a class="btn btn-secondary" href="#contatti">Contattami</a>
+                    </div>
+                </div>
+                <div class="portrait">
+                    <div class="photo-card" aria-label="Avatar">👨‍💻</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="chi-sono">
+            <div class="container">
+                <h2 class="section-title">Chi sono</h2>
+                <div class="card-grid">
+                    <article class="card">
+                        <h3>Visione</h3>
+                        <p>Un progetto digitale non è solo bello da vedere: deve risolvere problemi reali, migliorare i processi e offrire valore alle persone.</p>
+                    </article>
+                    <article class="card">
+                        <h3>Approccio</h3>
+                        <p>Credo nell'equilibrio tra design, funzionalità e usabilità: il risultato deve essere elegante ma concreto, semplice ma potente.</p>
+                    </article>
+                    <article class="card">
+                        <h3>Obiettivo</h3>
+                        <p>Aiutare aziende, professionisti e brand a trasformare le idee in esperienze digitali efficaci e memorabili.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="servizi">
+            <div class="container">
+                <h2 class="section-title">Competenze</h2>
+                <div class="card-grid">
+                    <article class="card">
+                        <h3>Frontend</h3>
+                        <p>Realizzo interfacce moderne, responsive e adatte a tutti i dispositivi.</p>
+                        <div class="stack">
+                            <span class="chip">HTML</span>
+                            <span class="chip">CSS</span>
+                            <span class="chip">JavaScript</span>
+                            <span class="chip">React</span>
+                        </div>
+                    </article>
+                    <article class="card">
+                        <h3>Backend</h3>
+                        <p>Developo logiche applicative, API e sistemi robusti per gestire i dati e i processi.</p>
+                        <div class="stack">
+                            <span class="chip">Node.js</span>
+                            <span class="chip">Python</span>
+                            <span class="chip">API</span>
+                            <span class="chip">Database</span>
+                        </div>
+                    </article>
+                    <article class="card">
+                        <h3>UX & Design</h3>
+                        <p>Mi occupo anche dell'aspetto dell'esperienza utente, con attenzione alla chiarezza e all'impatto visivo.</p>
+                        <div class="stack">
+                            <span class="chip">UI Design</span>
+                            <span class="chip">Figma</span>
+                            <span class="chip">Branding</span>
+                            <span class="chip">Layout</span>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="progetti">
+            <div class="container">
+                <h2 class="section-title">Progetti</h2>
+                <div class="project-list">
+                    <article class="project-card">
+                        <h3>Landing Page</h3>
+                        <p>Progettazione e sviluppo di una landing page moderna per motivare conversioni e rafforzare il brand online.</p>
+                        <div class="project-meta">
+                            <span class="label">Web Design</span>
+                            <span class="label">UI/UX</span>
+                        </div>
+                    </article>
+                    <article class="project-card">
+                        <h3>Dashboard</h3>
+                        <p>Interfaccia amministrativa con grafici, filtri e dati in tempo reale per semplificare il monitoraggio delle attività.</p>
+                        <div class="project-meta">
+                            <span class="label">Dashboard</span>
+                            <span class="label">Analytics</span>
+                        </div>
+                    </article>
+                    <article class="project-card">
+                        <h3>E-commerce</h3>
+                        <p>Soluzione completa per catalogo prodotti, checkout e gestione ordini, pensata per un'esperienza utente fluida.</p>
+                        <div class="project-meta">
+                            <span class="label">Ecommerce</span>
+                            <span class="label">Backend</span>
+                        </div>
+                    </article>
+                    <article class="project-card">
+                        <h3>Portfolio</h3>
+                        <p>Pagina personale progettata per mostrare competenze, progetti e contatti in modo professionale e immediato.</p>
+                        <div class="project-meta">
+                            <span class="label">Portfolio</span>
+                            <span class="label">Brand</span>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="contatti">
+            <div class="container">
+                <h2 class="section-title">Contatti</h2>
+                <div class="contact-box">
+                    <p>Se vuoi collaborare, realizzare un progetto o semplicemente fare due chiacchiere, scrivimi.</p>
+                    <form onsubmit="event.preventDefault(); alert('Grazie! Ti risponderò al più presto.'); this.reset();">
+                        <input type="text" placeholder="Nome" aria-label="Nome" required>
+                        <input type="email" placeholder="Email" aria-label="Email" required>
+                        <textarea placeholder="Messaggio" aria-label="Messaggio" required></textarea>
+                        <button type="submit" class="btn btn-primary submit-btn">Invia messaggio</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="socials" aria-label="Social network">
+                <a href="https://github.com/sardogiovanni98-code" target="_blank" rel="noreferrer" aria-label="GitHub">🐙</a>
+                <a href="https://www.linkedin.com" target="_blank" rel="noreferrer" aria-label="LinkedIn">💼</a>
+                <a href="https://www.instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram">📷</a>
+            </div>
+            <div>© 2025 Sardo Giovanni — Tutti i diritti riservati.</div>
+        </div>
+    </footer>
+</body>
+</html>
